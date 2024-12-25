@@ -15,6 +15,9 @@
 </head>
 <body>
 There are <span th:text="${customers.size()}"></span> customer(s).
+<br><br>
+<a th:href="@{/customers/create}">Create new customer</a>
+<br><br>
 <table>
   <caption>Customers List</caption>
   <thead>
@@ -23,6 +26,7 @@ There are <span th:text="${customers.size()}"></span> customer(s).
     <th>Name</th>
     <th>Email</th>
     <th>Address</th>
+    <th>Delete Information</th>
   </tr>
   </thead>
   <tbody>
@@ -33,6 +37,7 @@ There are <span th:text="${customers.size()}"></span> customer(s).
     </td>
     <td th:text="${c.email}"></td>
     <td th:text="${c.address}"></td>
+    <td><a th:href="@{/customers/{id}/delete(id=${c.id})}">Delete</a></td>
   </tr>
   </tbody>
 </table>
