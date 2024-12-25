@@ -2,6 +2,7 @@ package cg.wbd.grandemonstration.service.impl;
 
 import cg.wbd.grandemonstration.model.Customer;
 import cg.wbd.grandemonstration.service.CustomerService;
+import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -23,8 +24,9 @@ public class SimpleCustomerServiceImpl implements CustomerService {
     }
 
     @Override
-    public List<Customer> findAll() {
-        return new ArrayList<>(customers);
+    public List<Customer> findAll() throws Exception {
+//        return new ArrayList<>(customers);
+        throw new Exception("a dummy exception");
     }
 
     @Override
@@ -53,7 +55,7 @@ public class SimpleCustomerServiceImpl implements CustomerService {
     }
 
     @Override
-    public List<Customer> findAll(List<Long> ids) {
+    public List<Customer> findAll(List<Long> ids) throws Exception {
         return ids.stream()
                 .map(this::findOne)
                 .collect(Collectors.toList());

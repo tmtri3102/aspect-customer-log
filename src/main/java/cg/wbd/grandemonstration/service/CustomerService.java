@@ -5,7 +5,7 @@ import cg.wbd.grandemonstration.model.Customer;
 import java.util.List;
 
 public interface CustomerService {
-    List<Customer> findAll();
+    List<Customer> findAll() throws Exception;
 
     Customer findOne(Long id);
 
@@ -15,7 +15,7 @@ public interface CustomerService {
 
     boolean exists(Long id);
 
-    List<Customer> findAll(List<Long> ids);
+    List<Customer> findAll(List<Long> ids) throws Exception;
 
     long count();
 
