@@ -46,7 +46,7 @@ public class CustomerController {
     }
 
     @GetMapping("{id}")
-    public ModelAndView showInformation(@PathVariable Long id) {
+    public ModelAndView showInformation(@PathVariable Long id) throws Exception {
         ModelAndView modelAndView = new ModelAndView("customers/info");
         Customer customer = customerService.findOne(id);
         modelAndView.addObject("customer", customer);

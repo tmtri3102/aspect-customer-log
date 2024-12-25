@@ -31,6 +31,7 @@ public class SimpleCustomerServiceImpl implements CustomerService {
 
     @Override
     public Customer findOne(Long id) {
+
         return customers.stream()
                 .filter(c -> c.getId().equals(id))
                 .findFirst()

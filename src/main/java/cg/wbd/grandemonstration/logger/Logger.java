@@ -11,13 +11,13 @@ import java.util.Arrays;
 @Component
 @Aspect
 public class Logger {
-    @AfterThrowing(pointcut = "execution(public * cg.wbd.grandemonstration.service.impl.SimpleCustomerServiceImpl.findAll(..))", throwing = "e")
-    public void logMethod(Exception e) {
+
+    @AfterThrowing(pointcut = "execution(public * cg.wbd.grandemonstration.service.CustomerService.*(..))", throwing = "e")
+    public void error(Exception e) {
         System.out.println("[CMS] co loi xay ra: " + e.getMessage());
     }
-
-    @AfterReturning(pointcut = "execution(public * cg.wbd.grandemonstration.service.impl.SimpleCustomerServiceImpl.*(..))")
-    public void logClass(JoinPoint joinPoint) {
+    @AfterReturning(pointcut = "execution(public * cg.wbd.grandemonstration.service..CustomerService.*(..))")
+    public void error(JoinPoint joinPoint) {
         String className = joinPoint.getTarget().getClass().getSimpleName();
         String method = joinPoint.getSignature().getName();
         String args = Arrays.toString(joinPoint.getArgs());
