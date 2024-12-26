@@ -1,5 +1,6 @@
 package cg.wbd.grandemonstration.service;
 
+import cg.wbd.grandemonstration.exception.DuplicateEmailException;
 import cg.wbd.grandemonstration.model.Customer;
 
 import java.util.List;
@@ -9,9 +10,9 @@ public interface CustomerService {
 
     Customer findOne(Long id);
 
-    Customer save(Customer customer);
+    Customer save(Customer customer) throws DuplicateEmailException;
 
-    List<Customer> save(List<Customer> customers);
+//    List<Customer> save(List<Customer> customers);
 
     boolean exists(Long id);
 

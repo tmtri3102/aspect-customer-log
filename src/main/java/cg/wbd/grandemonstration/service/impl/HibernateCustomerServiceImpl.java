@@ -1,5 +1,6 @@
 package cg.wbd.grandemonstration.service.impl;
 
+import cg.wbd.grandemonstration.exception.DuplicateEmailException;
 import cg.wbd.grandemonstration.model.Customer;
 import cg.wbd.grandemonstration.service.CustomerService;
 import org.hibernate.HibernateException;
@@ -43,7 +44,7 @@ public class HibernateCustomerServiceImpl implements CustomerService {
     }
 
     @Override
-    public Customer save(Customer customer) {
+    public Customer save(Customer customer) throws DuplicateEmailException {
         Session session = null;
         Transaction transaction = null;
         try {
@@ -71,10 +72,10 @@ public class HibernateCustomerServiceImpl implements CustomerService {
         return null;
     }
 
-    @Override
-    public List<Customer> save(List<Customer> customers) {
-        return null;
-    }
+//    @Override
+//    public List<Customer> save(List<Customer> customers) {
+//        return null;
+//    }
 
     @Override
     public boolean exists(Long id) {

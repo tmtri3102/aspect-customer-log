@@ -1,14 +1,12 @@
 package cg.wbd.grandemonstration.controller;
 
+import cg.wbd.grandemonstration.exception.DuplicateEmailException;
 import cg.wbd.grandemonstration.model.Customer;
 import cg.wbd.grandemonstration.service.CustomerService;
 import cg.wbd.grandemonstration.service.impl.SimpleCustomerServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
 import java.util.List;
@@ -18,6 +16,11 @@ import java.util.List;
 public class CustomerController {
     @Autowired
     private CustomerService customerService;
+
+    @ExceptionHandler(DuplicateEmailException.class)
+    public ModelAndView showInputNotAcceptable() {
+        return new ModelAndView("/inputs-not-acceptable");
+    }
 
     @GetMapping
     public ModelAndView showList() {
@@ -39,7 +42,8 @@ public class CustomerController {
     }
 
     @PostMapping("/save")
-    public ModelAndView save(Customer customer) {
+    public ModelAndView save(Customer customer) throws DuplicateEmailException {
+        System.out.println("Hello");
         ModelAndView mv = new ModelAndView("redirect:/customers");
         customerService.save(customer);
         return mv;
@@ -54,7 +58,7 @@ public class CustomerController {
     }
 
     @PostMapping
-    public String updateCustomer(Customer customer) {
+    public String updateCustomer(Customer customer) throws DuplicateEmailException {
         customerService.save(customer);
         return "redirect:/customers";
     }

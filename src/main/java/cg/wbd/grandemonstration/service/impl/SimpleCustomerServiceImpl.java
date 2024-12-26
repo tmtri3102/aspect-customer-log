@@ -1,5 +1,6 @@
 package cg.wbd.grandemonstration.service.impl;
 
+import cg.wbd.grandemonstration.exception.DuplicateEmailException;
 import cg.wbd.grandemonstration.model.Customer;
 import cg.wbd.grandemonstration.service.CustomerService;
 import org.springframework.stereotype.Service;
@@ -25,8 +26,8 @@ public class SimpleCustomerServiceImpl implements CustomerService {
 
     @Override
     public List<Customer> findAll() throws Exception {
-//        return new ArrayList<>(customers);
-        throw new Exception("a dummy exception");
+        return new ArrayList<>(customers);
+//        throw new Exception("a dummy exception");
     }
 
     @Override
@@ -39,16 +40,21 @@ public class SimpleCustomerServiceImpl implements CustomerService {
     }
 
     @Override
-    public Customer save(Customer customer) {
-        return customer.getId() == null ? persist(customer) : merge(customer);
+    public Customer save(Customer customer) throws DuplicateEmailException {
+        if(customer.getId() == null) {
+            persist(customer);
+        } else {
+            merge(customer);
+        }
+        return customer;
     }
 
-    @Override
-    public List<Customer> save(List<Customer> customers) {
-        return customers.stream()
-                .map(this::save)
-                .collect(Collectors.toList());
-    }
+//    @Override
+//    public List<Customer> save(List<Customer> customers) {
+//        return customers.stream()
+//                .map(this::save)
+//                .collect(Collectors.toList());
+//    }
 
     @Override
     public boolean exists(Long id) {
